@@ -24,6 +24,17 @@ const VideoPlayer = ({ src, title, poster }) => {
       });
     };
 
+    dataLayer.push({
+      event: "video_event",
+      video_action: "start", // start | progress | complete (if  100% watched ) | pause | resume | watched (if 90%+ watched)
+      video_title: `${videoTitle}`,
+      video_url: `${src}`,
+      video_duration: Math.round(video.duration),
+      video_percent: calculateVideoPercent(currentTime),
+      video_current_time: Math.round(currentTime),
+      video_player: "HTML5",
+    });
+
     // Calculate video percent for progress events
     const calculateVideoPercent = (currentTime) => {
       const percent = (currentTime / video.duration) * 100;
