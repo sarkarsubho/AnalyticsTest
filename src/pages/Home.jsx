@@ -1,6 +1,6 @@
 import React from "react";
-import reactLogo from '../assets/react.svg'
-import viteLogo from '/vite.svg'
+import reactLogo from "../assets/react.svg";
+import viteLogo from "/vite.svg";
 import { useNavigate } from "react-router-dom";
 import pdf from "../assets/OrderDetails.pdf";
 
@@ -20,7 +20,27 @@ const Home = () => {
       <div className="card">
         <button onClick={() => navigate("/video")}>Go to video Page</button>
         <button onClick={() => navigate("/pdf")}>Go to PDF Page</button>
-        <a href={pdf} target="_blank" rel="noopener noreferrer">open pdf</a>
+
+        <button
+          onClick={() => {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: "test_event",
+              updates: {
+                time: new Date().toISOString(),
+                random: Math.random(),
+                name: "test_user",
+                selected: "option1",
+              },
+              timestamp: new Date().toISOString(),
+            });
+          }}
+        >
+          push object to dataLayer
+        </button>
+        <a href={pdf} target="_blank" rel="noopener noreferrer">
+          open pdf
+        </a>
       </div>
     </div>
   );
